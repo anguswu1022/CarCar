@@ -146,8 +146,8 @@ def api_appointments(request):
     else:
         try:
             content = json.loads(request.body)
-            vin = AutomobileVO.objects.get(vin=content['vin'])
-            technician = Technician.objects.get(pk=content['technician'])
+            vin, _ = AutomobileVO.objects.get_or_create(vin=content['vin'])
+            technician, _ = Technician.objects.get_or_create(pk=content['technician'])
             content['vin'] = vin
             content['technician'] = technician
             appointment = Appointment.objects.create(**content)
@@ -162,8 +162,3 @@ def api_appointments(request):
             )
             response.status_code = 400
             return response
-
-
-# # Build a view that recieves a DELETE, GET, and PUT request for a single appointment
-# @require_http_methods(["DELETE", "GET", "PUT"])
-# def api_appointment(request, pk):
