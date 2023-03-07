@@ -23,5 +23,7 @@ class Appointment(models.Model):
     time = models.TimeField()
     technician = models.ForeignKey(Technician, on_delete=models.CASCADE)
     reason = models.CharField(max_length=250)
+    def get_api_url(self):
+        return reverse("api_appointment", kwargs={"pk": self.id})
     def __str__(self):
-        return self.vin
+        return self.id
