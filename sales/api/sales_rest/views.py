@@ -120,6 +120,44 @@ def api_customers(request):
             safe=False,
         )
 
+@require_http_methods(["GET", "DELETE", "PUT"])
+def api_customer(request, id):
+    if request.method == "GET":
+        try:
+            customer = Customer.objects.get(id=id)
+            return JsonResponse(
+                customer,
+                encoder=CustomerEncoder,
+                safe=False,
+            )
+        except Customer.DoesNotExist:
+            return JsonResponse(
+                {"message": "Customer does not exist"},
+                status=404,
+            )
+    elif request.method == "DELETE":
+        count, _ = Customer.objects.filter(id=id).delete()
+        return JsonResponse({"deleted": count > 0})
+    else:
+        content = json.loads(request.body)
+        try:
+            if "customer" in content:
+                customer = Customer.objects.get(id=content["customer"])
+                content["customer"] = customer
+        except Customer.DoesNotExist:
+            return JsonResponse(
+                {"message": "Customer does not exist"},
+                status=404,
+            )
+        Customer.objects.filter(id=id).update(**content)
+        customer = Customer.objects.get(id=id)
+        return JsonResponse(
+            customer,
+            encoder=CustomerEncoder,
+            safe=False,
+        )
+
+
 @require_http_methods(["GET", "POST"])
 def api_sales(request):
     if request.method == "GET":
