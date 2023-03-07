@@ -77,7 +77,7 @@ def api_sales_person(request, id):
         except Sales_Person.DoesNotExist:
             return JsonResponse(
                 {"message": "Sales person does not exist"},
-                status=400,
+                status=404,
             )
     elif request.method == "DELETE":
         count, _ = Sales_Person.objects.filter(id=id).delete()
@@ -202,3 +202,22 @@ def api_sales(request):
             encoder=SaleEncoder,
             safe=False,
         )
+
+@require_http_methods(["GET", "DELETE"])
+def api_sale(request, id):
+    if request.method == "GET":
+        try:
+            sale = Sale.objects.get(id=id)
+            return JsonResponse(
+                sale,
+                encoder=SaleEncoder,
+                safe=False,
+            )
+        except Sale.DoesNotExist:
+            return JsonResponse(
+                {"message": "Sale does not exist"},
+                status=404,
+            )
+    else:
+        count, _ = Sale.objects.filter(id=id).delete()
+        return JsonResponse({"deleted": count > 0})
