@@ -216,3 +216,19 @@ def api_appointment(request, pk):
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
             return response
+
+
+
+@require_http_methods(["GET"])
+def api_appointments_by_vin(request, vin):
+    try:
+        vinURL = AutomobileVO.objects.get(vin=vin)
+        appointments = Appointment.objects.filter(vin=vinURL)
+        return JsonResponse(
+            {"appointments": appointments},
+            encoder=AppointmentListEncoder,
+        )
+    except Appointment.DoesNotExist:
+        response = JsonResponse({"message": "Does not exist"})
+        response.status_code = 404
+        return response
