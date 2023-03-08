@@ -13,6 +13,9 @@ function Nav() {
             <li>
             <NavLink className="navbar-brand" to="/technician">New technician</NavLink>
             </li>
+            <li>
+            <NavLink className="navbar-brand" to="/appointments/new">New appointment</NavLink>
+            </li>
           </ul>
         </div>
       </div>
