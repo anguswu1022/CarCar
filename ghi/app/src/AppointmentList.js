@@ -47,8 +47,8 @@ function AppointmentList() {
                         </tr>
                     </thead>
                     <tbody>
-                        {appointments.map((appointment) => (
-                            <tr key={appointment.id}>
+                        {appointments.map((appointment, id) => (
+                            <tr key={id} value={appointment.id}>
                                 <td>{appointment.owner}</td>
                                 <td>{appointment.vin}</td>
                                 <td>{appointment.date}</td>
