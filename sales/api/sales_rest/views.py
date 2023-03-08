@@ -46,7 +46,7 @@ def api_sales_person(request, id):
         content = json.loads(request.body)
         try:
             if "sales_person" in content:
-                sales_person = Sales_Person.objects.get(id=content["sales_person"])
+                sales_person = Sales_Person.objects.get(employee_number=content["sales_person"])
                 content["sales_person"] = sales_person
         except Sales_Person.DoesNotExist:
             return JsonResponse(
@@ -121,44 +121,37 @@ def api_customer(request, id):
 def api_sales(request):
     if request.method == "GET":
         sales = Sale.objects.all()
+
         return JsonResponse(
             {"sales": sales},
             encoder=SaleEncoder,
         )
     else:
         content = json.loads(request.body)
-        try:
-            sales_person = Sales_Person.objects.get(id=content["sales_person"])
-            content["sales_person"] = sales_person
-        except Sales_Person.DoesNotExist:
-            return JsonResponse(
-                {"message": "Sales person does not exist"},
-                status= 400,
-            )
-        try:
-            customer = Customer.objects.get(id=content["customer"])
-            content["customer"] = customer
-        except Customer.DoesNotExist:
-            return JsonResponse(
-                {"message": "Customer does not exist"},
-                status=400,
-            )
+
         try:
             automobile = AutomobileVO.objects.get(vin=content["automobile"])
-            automobile.sold = True
-            automobile.save()
             content["automobile"] = automobile
+
+            customer = Customer.objects.get(id=content["customer"])
+            content["customer"] = customer
+
+            sales_person = Sales_Person.objects.get(employee_number=content["sales_person"])
+            content["sales_person"] = sales_person
+
         except AutomobileVO.DoesNotExist:
             return JsonResponse(
-                {"message": "Automobile does not exist"},
+                {"message": "Invalid automobile vin"},
                 status=400,
             )
+
         sale = Sale.objects.create(**content)
         return JsonResponse(
             sale,
             encoder=SaleEncoder,
             safe=False,
         )
+
 
 @require_http_methods(["GET", "DELETE"])
 def api_sale(request, id):

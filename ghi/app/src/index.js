@@ -8,20 +8,3 @@ root.render(
     <App />
   </React.StrictMode>
 );
-
-async function loadData() {
-  const salesResponse = await fetch("http://localhost:8090/api/sales");
-
-  if (salesResponse.ok) {
-    const sales = await salesResponse.json();
-
-    root.render(
-      <React.StrictMode>
-        <App sales={sales.sales} />
-      </React.StrictMode>
-    );
-  } else {
-    console.error(salesResponse);
-  }
-}
-loadData();

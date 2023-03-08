@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-export default function SaleRecordForm() {
-  const [salesPersons, setSalesPersons] = useState([]);
-  const [customers, setCustomers] = useState([]);
-  const [automobiles, setAutomobiles] = useState([]);
+export default function SaleRecordForm(props) {
   const [salesPerson, setSalesPerson] = useState("");
   const [customer, setCustomer] = useState("");
   const [automobile, setAutomobile] = useState("");
@@ -59,42 +56,6 @@ export default function SaleRecordForm() {
     setPrice(value);
   };
 
-  const fetchSalesPersonsData = async () => {
-    const url = "http://localhost:8090/api/sales_persons/";
-    const response = await fetch(url);
-
-    if (response.ok) {
-      const data = await response.json();
-      setSalesPersons(data.sales_persons);
-    }
-  };
-
-  const fetchCustomersData = async () => {
-    const url = "http://localhost:8090/api/customers/";
-    const response = await fetch(url);
-
-    if (response.ok) {
-      const data = await response.json();
-      setCustomers(data.customers);
-    }
-  };
-
-  const fetchAutomobilesData = async () => {
-    const url = "http://localhost:8100/api/automobiles/";
-    const response = await fetch(url);
-
-    if (response.ok) {
-      const data = await response.json();
-      setAutomobiles(data.autos);
-    }
-  };
-
-  useEffect(() => {
-    fetchSalesPersonsData();
-    fetchCustomersData();
-    fetchAutomobilesData();
-  }, []);
-
   return (
     <div className="row">
       <div className="offset-3 col-6">
@@ -111,9 +72,12 @@ export default function SaleRecordForm() {
                 className="form-select"
               >
                 <option value="">Choose a sales person</option>
-                {salesPersons.map((salesPerson) => {
+                {props.salesPersons.map((salesPerson) => {
                   return (
-                    <option key={salesPerson.id} value={salesPerson.id}>
+                    <option
+                      key={salesPerson.employee_number}
+                      value={salesPerson.employee_number}
+                    >
                       {salesPerson.name}
                     </option>
                   );
@@ -130,7 +94,7 @@ export default function SaleRecordForm() {
                 className="form-select"
               >
                 <option value="">Choose a customer</option>
-                {customers.map((customer) => {
+                {props.customers.map((customer) => {
                   return (
                     <option key={customer.id} value={customer.id}>
                       {customer.name}
@@ -149,15 +113,15 @@ export default function SaleRecordForm() {
                 className="form-select"
               >
                 <option value="">Choose an automobile</option>
-                {automobiles
-                  .filter((automobile) => !automobile.sold)
-                  .map((automobile) => {
+                {props.automobile.map((automobile) => {
+                  if (automobile.vin in props.sales) {
                     return (
                       <option key={automobile.vin} value={automobile.vin}>
                         {automobile.vin}
                       </option>
                     );
-                  })}
+                  }
+                })}
               </select>
             </div>
             <div className="form-floating mb-3">

@@ -5,15 +5,12 @@ from .models import AutomobileVO, Sales_Person, Customer, Sale
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
     properties = [
-        "id",
         "vin",
-        "sold",
     ]
 
 class SalesPersonEncoder(ModelEncoder):
     model = Sales_Person
     properties = [
-        "id",
         "name",
         "employee_number",
     ]

@@ -1,4 +1,4 @@
-export default function SaleList({ sales }) {
+export default function SaleList(props) {
   return (
     <div className="mt-4">
       <h1>Sales</h1>
@@ -13,7 +13,7 @@ export default function SaleList({ sales }) {
           </tr>
         </thead>
         <tbody>
-          {sales?.map((sale) => {
+          {props.sales.map((sale) => {
             return (
               <tr className="table-row" key={sale.id}>
                 <td>{sale.sales_person.name}</td>
