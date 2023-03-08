@@ -150,7 +150,7 @@ def api_appointments(request):
         try:
             content = json.loads(request.body)
             vin, _ = AutomobileVO.objects.get_or_create(vin=content['vin'])
-            technician, _ = Technician.objects.get_or_create(pk=content['technician'])
+            technician, _ = Technician.objects.get_or_create(name=content['technician'])
             content['vin'] = vin
             content['technician'] = technician
             appointment = Appointment.objects.create(**content)
