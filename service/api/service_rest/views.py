@@ -35,6 +35,7 @@ class AppointmentListEncoder(ModelEncoder):
         "date",
         "time",
         "technician",
+        "reason",
     ]
     def default(self, obj):
         if isinstance(obj, AutomobileVO):
@@ -46,6 +47,8 @@ class AppointmentListEncoder(ModelEncoder):
         if isinstance(obj, Technician):
             return obj.name
         return super().default(obj)
+    def get_api_url(self, obj):
+        return obj.get_api_url()
 
 class CreateAppointmentEncoder(ModelEncoder):
     model = Appointment
@@ -161,4 +164,55 @@ def api_appointments(request):
                 {"message": f"Could not create the appointment- {e}"}
             )
             response.status_code = 400
+            return response
+
+
+@require_http_methods(["DELETE", "GET", "PUT"])
+def api_appointment(request, pk):
+    if request.method == "GET":
+        try:
+            appointment = Appointment.objects.get(pk=pk)
+            return JsonResponse(
+                appointment,
+                encoder=AppointmentListEncoder,
+                safe=False
+            )
+        except Appointment.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
+    elif request.method == "DELETE":
+        try:
+            appointment = Appointment.objects.get(pk=pk)
+            appointment.delete()
+            return JsonResponse(
+                appointment,
+                encoder=AppointmentListEncoder,
+                safe=False
+            )
+        except Appointment.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
+            return response
+    elif request.method == "PUT":
+        try:
+            content = json.loads(request.body)
+            appointment = Appointment.objects.get(pk=pk)
+            vin, _ = AutomobileVO.objects.get_or_create(vin=content['vin'])
+            technician, _ = Technician.objects.get_or_create(pk=content['technician'])
+            appointment.vin = vin
+            appointment.owner = content['owner']
+            appointment.date = content['date']
+            appointment.time = content['time']
+            appointment.technician = technician
+            appointment.reason = content['reason']
+            appointment.save()
+            return JsonResponse(
+                appointment,
+                encoder=AppointmentListEncoder,
+                safe=False
+            )
+        except Appointment.DoesNotExist:
+            response = JsonResponse({"message": "Does not exist"})
+            response.status_code = 404
             return response
