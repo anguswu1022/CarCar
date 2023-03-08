@@ -39,7 +39,7 @@ class AppointmentListEncoder(ModelEncoder):
     ]
     def default(self, obj):
         if isinstance(obj, AutomobileVO):
-            return obj.id
+            return obj.vin
         if isinstance(obj, date):
             return obj.strftime("%Y-%m-%d")
         if isinstance(obj, time):
