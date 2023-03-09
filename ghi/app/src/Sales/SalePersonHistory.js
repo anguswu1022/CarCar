@@ -8,6 +8,10 @@ export default function SalePersonHistory(props) {
     setName(value);
   };
 
+  const filteredSales = name
+    ? props.sales.filter((sale) => sale.sales_person.name === name)
+    : props.sales;
+
   return (
     <div className="mt-4">
       <h1>Sales person history</h1>
@@ -20,10 +24,7 @@ export default function SalePersonHistory(props) {
           <option value="">Choose a sales person</option>
           {props.salesPersons.map((salesPerson) => {
             return (
-              <option
-                key={salesPerson.employee_number}
-                value={salesPerson.employee_number}
-              >
+              <option key={salesPerson.name} value={salesPerson.name}>
                 {salesPerson.name}
               </option>
             );
@@ -40,7 +41,7 @@ export default function SalePersonHistory(props) {
           </tr>
         </thead>
         <tbody>
-          {props.sales.map((sale) => {
+          {filteredSales.map((sale) => {
             return (
               <tr className="table-row" key={sale.id}>
                 <td>{sale.sales_person.name}</td>
