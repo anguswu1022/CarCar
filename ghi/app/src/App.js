@@ -10,9 +10,12 @@ import SalePersonHistory from "./Sales/SalePersonHistory";
 import TechnicianForm from "./TechnicianForm";
 import AppointmentForm from "./AppointmentForm";
 import AppointmentList from "./AppointmentList";
-import VehicleForm from "./VehicleForm";
-import AutomobileList from "./AutomobileList";
-import AutomobileForm from "./AutomobileForm";
+import VehicleForm from "./Inventory/VehicleForm";
+import AutomobileList from "./Inventory/AutomobileList";
+import AutomobileForm from "./Inventory/AutomobileForm";
+import ManufacturerList from "./Inventory/ManufacturerList";
+import ManufacturerForm from "./Inventory/ManufacturerForm";
+import VehicleModelList from "./Inventory/VehicleModelList";
 
 export default function App() {
   const [sales, setSales] = useState([]);
@@ -107,6 +110,11 @@ export default function App() {
                 path=""
                 element={<VehicleModelList vehicleModels={vehicleModel} />}
               />
+              <Route path="new" element={<VehicleForm />} />
+            </Route>
+            <Route path="automobiles">
+              <Route path="" element={<AutomobileList />} />
+              <Route path="new" element={<AutomobileForm />} />
             </Route>
           </Route>
           <Route path="sales_persons/new" element={<SalesPersonForm />} />
@@ -130,20 +138,12 @@ export default function App() {
               }
             />
           </Route>
-
-          <Route path="customers/new" element={<CustomerForm />} />
-          <Route path="technician" element={<TechnicianForm />} />
-          <Route path="appointments" element={<AppointmentList />} />
           <Route path="appointments">
+            <Route path="" element={<AppointmentList />} />
             <Route path="new" element={<AppointmentForm />} />
           </Route>
-          <Route path="vehicles">
-            <Route path="new" element={<VehicleForm />} />
-          </Route>
-          <Route path="automobiles" element={<AutomobileList />} />
-          <Route path="automobiles">
-            <Route path="new" element={<AutomobileForm />} />
-          </Route>
+          <Route path="customers/new" element={<CustomerForm />} />
+          <Route path="technician" element={<TechnicianForm />} />
         </Routes>
       </div>
     </BrowserRouter>

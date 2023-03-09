@@ -57,6 +57,24 @@ function Nav() {
                     Vehicle Model List
                   </Link>
                 </li>
+                <li>
+                  <Link className="dropdown-item" to="inventory/models/new">
+                    New Vehicle Model
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="inventory/automobiles">
+                    Automobile List
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="dropdown-item"
+                    to="inventory/automobiles/new"
+                  >
+                    New Automobile
+                  </Link>
+                </li>
               </ul>
             </li>
             <li className="nav-item dropdown">
@@ -75,7 +93,7 @@ function Nav() {
               >
                 <li>
                   <Link className="dropdown-item" to="sales/new">
-                    Add Sale
+                    New Sale
                   </Link>
                 </li>
                 <li>
@@ -90,54 +108,45 @@ function Nav() {
                 </li>
               </ul>
             </li>
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                id="navbarDarkDropdownMenuLink"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Appointments
+              </a>
+              <ul
+                className="dropdown-menu"
+                aria-labelledby="navbarDarkDropdownMenuLink"
+              >
+                <li>
+                  <Link className="dropdown-item" to="appointments">
+                    Appointment List
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="appointments/new">
+                    New appointment
+                  </Link>
+                </li>
+              </ul>
+            </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/sales_persons/new">
-                Add Sales Person
+                New Sales Person
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/customers/new">
-                Add Customer
+                New Customer
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/technician">
                 New technician
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/appointments/new">
-                New appointment
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/technician">
-                New Technician
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/appointments">
-                Appointment List
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/appointments/new">
-                New Appointment
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/vehicles/new">
-                New Model
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/automobiles">
-                Automobile List
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/automobiles/new">
-                New Automobile
               </NavLink>
             </li>
           </ul>
