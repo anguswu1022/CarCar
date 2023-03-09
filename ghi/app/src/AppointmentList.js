@@ -13,15 +13,21 @@ function AppointmentList() {
     };
 
 
-    useEffect(() => {
-        getAppointments();
-    } , []);
+    // useEffect(() => {
+    //     fetchData();
+    // } , []);
+
     function getAppointments() {
         fetchData();
     }
+
     function cancelAppointment(href) {
-        fetch(`http://localhost:8080${href}`,{
-            method: 'DELETE',
+        fetch(`http://localhost:8080${href}cancel/`,{
+            method:'put',
+            body: JSON.stringify(),
+            headers:{
+                'Content-Type': 'application/json'
+            }
         }).then((result) => {
             result.json().then((resp) => {
                 console.warn(resp)
@@ -29,6 +35,21 @@ function AppointmentList() {
             })
         })
     }
+
+    useEffect(() => {
+        getAppointments();
+    }, []);
+
+    // function cancelAppointment(href) {
+    //     fetch(`http://localhost:8080${href}`,{
+    //     method:'PUT',
+    // }).then((result) => {
+    //     result.json().then((resp) => {
+    //         console.warn(resp)
+    //         getAppointments()
+    //     })
+    // })
+    // }
 
     return (
         <div className="row">
@@ -47,7 +68,7 @@ function AppointmentList() {
                         </tr>
                     </thead>
                     <tbody>
-                        {appointments.map((appointment, id) => (
+                        {appointments.filter((appointment)=>appointment.canceled===false&&appointment.completed===false).map((appointment, id) => (
                             <tr key={id} value={appointment.id}>
                                 <td>{appointment.owner}</td>
                                 <td>{appointment.vin}</td>
@@ -56,6 +77,7 @@ function AppointmentList() {
                                 <td>{appointment.technician}</td>
                                 <td>{appointment.reason}</td>
                                 <td>
+                                <button onClick={() => cancelAppointment(appointment.href)} type="button" className="btn btn-primary">Completed</button>
                                 <button onClick={() => cancelAppointment(appointment.href)} type="button" className="btn btn-danger">Cancel</button>
                                 </td>
                             </tr>
