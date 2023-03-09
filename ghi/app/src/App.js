@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import MainPage from "./MainPage";
 import Nav from "./Nav";
+
+// Sales components
 import CustomerForm from "./Sales/CustomerForm";
 import SalesPersonForm from "./Sales/SalesPersonForm";
 import SaleRecordForm from "./Sales/SaleRecordForm";
 import SaleList from "./Sales/SaleList";
 import SalePersonHistory from "./Sales/SalePersonHistory";
+
+// Service components
 import TechnicianForm from "./TechnicianForm";
 import AppointmentForm from "./AppointmentForm";
 import AppointmentList from "./AppointmentList";
+
+// Inventory components
 import VehicleForm from "./Inventory/VehicleForm";
 import AutomobileList from "./Inventory/AutomobileList";
 import AutomobileForm from "./Inventory/AutomobileForm";
@@ -19,6 +26,12 @@ import VehicleModelList from "./Inventory/VehicleModelList";
 
 export default function App() {
   const [sales, setSales] = useState([]);
+  const [salesPerson, setSalesPerson] = useState([]);
+  const [automobiles, setAutomobiles] = useState([]);
+  const [manufacturer, setManufacturer] = useState([]);
+  const [vehicleModel, setVehicleModel] = useState([]);
+  const [customers, setCustomers] = useState([]);
+
   const fetchSalesData = async () => {
     const url = "http://localhost:8090/api/sales/";
     const response = await fetch(url);
@@ -28,7 +41,6 @@ export default function App() {
     }
   };
 
-  const [salesPerson, setSalesPerson] = useState([]);
   const fetchSalesPersonData = async () => {
     const url = "http://localhost:8090/api/sales_persons/";
     const response = await fetch(url);
@@ -38,7 +50,6 @@ export default function App() {
     }
   };
 
-  const [automobiles, setAutomobiles] = useState([]);
   const fetchAutomobilesData = async () => {
     const url = "http://localhost:8100/api/automobiles/";
     const response = await fetch(url);
@@ -49,7 +60,6 @@ export default function App() {
     }
   };
 
-  const [manufacturer, setManufacturer] = useState([]);
   const fetchManufacturerData = async () => {
     const url = "http://localhost:8100/api/manufacturers/";
     const response = await fetch(url);
@@ -60,7 +70,6 @@ export default function App() {
     }
   };
 
-  const [vehicleModel, setVehicleModel] = useState([]);
   const fetchVehicleModelData = async () => {
     const url = "http://localhost:8100/api/models/";
     const response = await fetch(url);
@@ -71,7 +80,6 @@ export default function App() {
     }
   };
 
-  const [customers, setCustomers] = useState([]);
   const fetchCustomersData = async () => {
     const url = "http://localhost:8090/api/customers/";
     const response = await fetch(url);
