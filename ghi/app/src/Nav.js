@@ -50,11 +50,23 @@ function Nav() {
                 Sales History
               </NavLink>
             </li>
-            <li>
-            <NavLink className="navbar-brand" to="/technician">New technician</NavLink>
+            <li className="nav-item">
+            <NavLink className="nav-link" to="/technician">New Technician</NavLink>
             </li>
-            <li>
-            <NavLink className="navbar-brand" to="/appointments/new">New appointment</NavLink>
+            <li className="nav-item">
+            <NavLink className="nav-link" to="/appointments">Appointment List</NavLink>
+            </li>
+            <li className="nav-item">
+            <NavLink className="nav-link" to="/appointments/new">New Appointment</NavLink>
+            </li>
+            <li className="nav-item">
+            <NavLink className="nav-link" to="/vehicles/new">New Model</NavLink>
+            </li>
+            <li className="nav-item">
+            <NavLink className="nav-link" to="/automobiles">Automobile List</NavLink>
+            </li>
+            <li className="nav-item">
+            <NavLink className="nav-link" to="/automobiles/new">New Automobile</NavLink>
             </li>
           </ul>
         </div>
