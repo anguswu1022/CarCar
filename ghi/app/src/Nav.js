@@ -40,11 +40,6 @@ function Nav() {
                 aria-labelledby="navbarDarkDropdownMenuLink"
               >
                 <li>
-                  <Link className="dropdown-item" to="inventory/manufacturers">
-                    Manufacturers List
-                  </Link>
-                </li>
-                <li>
                   <Link
                     className="dropdown-item"
                     to="inventory/manufacturers/new"
@@ -53,8 +48,8 @@ function Nav() {
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="inventory/models">
-                    Vehicle Model List
+                  <Link className="dropdown-item" to="inventory/manufacturers">
+                    Manufacturers List
                   </Link>
                 </li>
                 <li>
@@ -63,8 +58,8 @@ function Nav() {
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="inventory/automobiles">
-                    Automobile List
+                  <Link className="dropdown-item" to="inventory/models">
+                    Vehicle Model List
                   </Link>
                 </li>
                 <li>
@@ -73,6 +68,11 @@ function Nav() {
                     to="inventory/automobiles/new"
                   >
                     New Automobile
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="inventory/automobiles">
+                    Automobile List
                   </Link>
                 </li>
               </ul>
