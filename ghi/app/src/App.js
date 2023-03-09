@@ -94,8 +94,22 @@ export default function App() {
     setAutomobiles((oldAutomobiles) => [...oldAutomobiles, newAutomobile]);
   };
 
-  const handleAutomobileSaleCreated = (newSale) => {
+  const handleSaleCreated = (newSale) => {
     setSales((oldSales) => [...oldSales, newSale]);
+  };
+
+  const handleManufacturerCreated = (newManufacturer) => {
+    setManufacturer((oldManufacturers) => [
+      ...oldManufacturers,
+      newManufacturer,
+    ]);
+  };
+
+  const handleVehicleModelCreated = (newVehicleModel) => {
+    setVehicleModel((oldVehicleModels) => [
+      ...oldVehicleModels,
+      newVehicleModel,
+    ]);
   };
 
   useEffect(() => {
@@ -119,14 +133,28 @@ export default function App() {
                 path=""
                 element={<ManufacturerList manufacturers={manufacturer} />}
               />
-              <Route path="new" element={<ManufacturerForm />} />
+              <Route
+                path="new"
+                element={
+                  <ManufacturerForm
+                    onManufacturerCreated={handleManufacturerCreated}
+                  />
+                }
+              />
             </Route>
             <Route path="models">
               <Route
                 path=""
                 element={<VehicleModelList vehicleModels={vehicleModel} />}
               />
-              <Route path="new" element={<VehicleForm />} />
+              <Route
+                path="new"
+                element={
+                  <VehicleForm
+                    onVehicleModelCreated={handleVehicleModelCreated}
+                  />
+                }
+              />
             </Route>
             <Route path="automobiles">
               <Route path="" element={<AutomobileList />} />
@@ -151,7 +179,7 @@ export default function App() {
                   salesPersons={salesPerson}
                   sales={sales}
                   automobiles={automobiles}
-                  onSaleCreated={handleAutomobileSaleCreated}
+                  onSaleCreated={handleSaleCreated}
                 />
               }
             />

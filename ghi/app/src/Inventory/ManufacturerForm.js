@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function ManufacturerForm() {
+export default function ManufacturerForm(props) {
   const [name, setName] = useState("");
 
   const handleSubmit = async (event) => {
@@ -22,7 +22,7 @@ export default function ManufacturerForm() {
     const response = await fetch(manufacturerUrl, fetchConfig);
     if (response.ok) {
       const newManufacturer = await response.json();
-
+      props.onManufacturerCreated(newManufacturer);
       setName("");
     }
   };
