@@ -16,7 +16,7 @@ export default function CustomerForm() {
 
     const customerUrl = "http://localhost:8090/api/customers/";
     const fetchConfig = {
-      method: "post",
+      method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",

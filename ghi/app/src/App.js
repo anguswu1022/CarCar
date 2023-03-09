@@ -90,6 +90,14 @@ export default function App() {
     }
   };
 
+  const handleAutomobileCreated = (newAutomobile) => {
+    setAutomobiles((oldAutomobiles) => [...oldAutomobiles, newAutomobile]);
+  };
+
+  const handleAutomobileSaleCreated = (newSale) => {
+    setSales((oldSales) => [...oldSales, newSale]);
+  };
+
   useEffect(() => {
     fetchSalesData();
     fetchSalesPersonData();
@@ -122,7 +130,14 @@ export default function App() {
             </Route>
             <Route path="automobiles">
               <Route path="" element={<AutomobileList />} />
-              <Route path="new" element={<AutomobileForm />} />
+              <Route
+                path="new"
+                element={
+                  <AutomobileForm
+                    onAutomobileCreated={handleAutomobileCreated}
+                  />
+                }
+              />
             </Route>
           </Route>
           <Route path="sales_persons/new" element={<SalesPersonForm />} />
@@ -136,6 +151,7 @@ export default function App() {
                   salesPersons={salesPerson}
                   sales={sales}
                   automobiles={automobiles}
+                  onSaleCreated={handleAutomobileSaleCreated}
                 />
               }
             />

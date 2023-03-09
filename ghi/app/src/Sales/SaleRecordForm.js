@@ -21,7 +21,7 @@ export default function SaleRecordForm(props) {
 
     const saleUrl = "http://localhost:8090/api/sales/";
     const fetchConfig = {
-      method: "post",
+      method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
@@ -31,11 +31,10 @@ export default function SaleRecordForm(props) {
     const response = await fetch(saleUrl, fetchConfig);
     setSubmitted(true);
     if (response.ok) {
-      const newAutomobileSale = await response.json();
-      setSoldAutomobiles((oldAutomobileSales) => [
-        ...oldAutomobileSales,
-        newAutomobileSale,
-      ]);
+      const newSale = await response.json();
+
+      setSoldAutomobiles((oldSales) => [...oldSales, newSale]);
+      props.onSaleCreated(newSale);
       setSalesPerson("");
       setCustomer("");
       setAutomobile("");
@@ -91,13 +90,11 @@ export default function SaleRecordForm(props) {
                 className="form-select"
               >
                 <option value="">Choose an automobile</option>
-                {availableAutomobiles.map((automobile) => {
-                  return (
-                    <option key={automobile.vin} value={automobile.vin}>
-                      {automobile.vin}
-                    </option>
-                  );
-                })}
+                {availableAutomobiles.map((automobile) => (
+                  <option key={automobile.vin} value={automobile.vin}>
+                    {automobile.vin}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="mb-3">

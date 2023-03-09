@@ -14,7 +14,7 @@ export default function SalesPersonForm() {
 
     const salesPersonUrl = "http://localhost:8090/api/sales_persons/";
     const fetchConfig = {
-      method: "post",
+      method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
