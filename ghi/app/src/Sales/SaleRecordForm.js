@@ -31,8 +31,11 @@ export default function SaleRecordForm(props) {
     const response = await fetch(saleUrl, fetchConfig);
     setSubmitted(true);
     if (response.ok) {
-      const newSale = await response.json();
-      setSoldAutomobiles((oldSales) => [...oldSales, newSale]);
+      const newAutomobileSale = await response.json();
+      setSoldAutomobiles((oldAutomobileSales) => [
+        ...oldAutomobileSales,
+        newAutomobileSale,
+      ]);
       setSalesPerson("");
       setCustomer("");
       setAutomobile("");
