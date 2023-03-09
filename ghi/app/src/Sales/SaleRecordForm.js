@@ -7,6 +7,7 @@ export default function SaleRecordForm(props) {
   const [customer, setCustomer] = useState("");
   const [automobile, setAutomobile] = useState("");
   const [price, setPrice] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -28,13 +29,15 @@ export default function SaleRecordForm(props) {
     };
 
     const response = await fetch(saleUrl, fetchConfig);
+    setSubmitted(true);
     if (response.ok) {
       const newSale = await response.json();
-
+      setSoldAutomobiles((oldSales) => [...oldSales, newSale]);
       setSalesPerson("");
       setCustomer("");
       setAutomobile("");
       setPrice("");
+      setSubmitted(false);
     }
   };
 
@@ -63,7 +66,9 @@ export default function SaleRecordForm(props) {
       (soldAutomobile) => soldAutomobile.automobile.vin
     );
     setAvailableAutomobiles(
-      props.automobiles.filter((a) => !soldAutomobileVins.includes(a.vin))
+      props.automobiles.filter(
+        (automobile) => !soldAutomobileVins.includes(automobile.vin)
+      )
     );
   }, [soldAutomobiles]);
 
