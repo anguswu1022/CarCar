@@ -36,6 +36,8 @@ class AppointmentListEncoder(ModelEncoder):
         "time",
         "technician",
         "reason",
+        "completed",
+        "canceled",
     ]
     def default(self, obj):
         if isinstance(obj, AutomobileVO):
@@ -232,3 +234,17 @@ def api_appointments_by_vin(request, vin):
         response = JsonResponse({"message": "Does not exist"})
         response.status_code = 404
         return response
+
+
+@require_http_methods(["PUT"])
+def api_appointment_cancel(request, pk):
+    appointment = Appointment.objects.get(pk=pk)
+    appointment.canceled = True
+    appointment.save()
+
+
+@require_http_methods(["PUT"])
+def api_appointment_complete(request, pk):
+    appointment = Appointment.objects.get(pk=pk)
+    appointment.completed = True
+    appointment.save()

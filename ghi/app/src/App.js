@@ -10,9 +10,9 @@ import SalePersonHistory from "./Sales/SalePersonHistory";
 import TechnicianForm from "./TechnicianForm";
 import AppointmentForm from "./AppointmentForm";
 import AppointmentList from "./AppointmentList";
-import ManufacturerList from "./Inventory/ManufacturerList";
-import ManufacturerForm from "./Inventory/ManufacturerForm";
-import VehicleModelList from "./Inventory/VehicleModelList";
+import VehicleForm from "./VehicleForm";
+import AutomobileList from "./AutomobileList";
+import AutomobileForm from "./AutomobileForm";
 
 export default function App() {
   const [sales, setSales] = useState([]);
@@ -136,6 +136,13 @@ export default function App() {
           <Route path="appointments" element={<AppointmentList />} />
           <Route path="appointments">
             <Route path="new" element={<AppointmentForm />} />
+          </Route>
+          <Route path="vehicles">
+            <Route path="new" element={<VehicleForm />} />
+          </Route>
+          <Route path="automobiles" element={<AutomobileList />} />
+          <Route path="automobiles">
+            <Route path="new" element={<AutomobileForm />} />
           </Route>
         </Routes>
       </div>
