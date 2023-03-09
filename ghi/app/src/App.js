@@ -7,9 +7,12 @@ import SalesPersonForm from "./Sales/SalesPersonForm";
 import SaleRecordForm from "./Sales/SaleRecordForm";
 import SaleList from "./Sales/SaleList";
 import SalePersonHistory from "./Sales/SalePersonHistory";
-import TechnicianForm from './TechnicianForm';
-import AppointmentForm from './AppointmentForm';
-import AppointmentList from './AppointmentList';
+import TechnicianForm from "./TechnicianForm";
+import AppointmentForm from "./AppointmentForm";
+import AppointmentList from "./AppointmentList";
+import ManufacturerList from "./Inventory/ManufacturerList";
+import ManufacturerForm from "./Inventory/ManufacturerForm";
+import VehicleModelList from "./Inventory/VehicleModelList";
 
 export default function App() {
   const [sales, setSales] = useState([]);
@@ -43,14 +46,25 @@ export default function App() {
     }
   };
 
-  const [automobile, setAutomobile] = useState([]);
-  const fetchAutomobileData = async () => {
-    const url = "http://localhost:8100/api/automobiles/";
+  const [manufacturer, setManufacturer] = useState([]);
+  const fetchManufacturerData = async () => {
+    const url = "http://localhost:8100/api/manufacturers/";
     const response = await fetch(url);
 
     if (response.ok) {
       const data = await response.json();
-      setAutomobile(data);
+      setManufacturer(data.manufacturers);
+    }
+  };
+
+  const [vehicleModel, setVehicleModel] = useState([]);
+  const fetchVehicleModelData = async () => {
+    const url = "http://localhost:8100/api/models/";
+    const response = await fetch(url);
+
+    if (response.ok) {
+      const data = await response.json();
+      setVehicleModel(data.models);
     }
   };
 
@@ -69,10 +83,10 @@ export default function App() {
     fetchSalesData();
     fetchSalesPersonData();
     fetchAutomobilesData();
-    fetchAutomobileData();
+    fetchManufacturerData();
     fetchCustomersData();
+    fetchVehicleModelData();
   }, []);
-
 
   return (
     <BrowserRouter>
@@ -80,30 +94,48 @@ export default function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="sales_persons/new" element={<SalesPersonForm />} />
-          <Route path="customers/new" element={<CustomerForm />} />
-          <Route path="sales" element={<SaleList sales={sales} />} />
-          <Route
-            path="sales/new"
-            element={
-              <SaleRecordForm
-                customers={customers}
-                salesPersons={salesPerson}
-                sales={sales}
-                automobile={automobiles}
+          <Route path="inventory">
+            <Route path="manufacturers">
+              <Route
+                path=""
+                element={<ManufacturerList manufacturers={manufacturer} />}
               />
-            }
-          />
-          <Route
-            path="sales_history"
-            element={
-              <SalePersonHistory salesPersons={salesPerson} sales={sales} />
-            }
-          />
+              <Route path="new" element={<ManufacturerForm />} />
+            </Route>
+            <Route path="models">
+              <Route
+                path=""
+                element={<VehicleModelList vehicleModels={vehicleModel} />}
+              />
+            </Route>
+          </Route>
+          <Route path="sales_persons/new" element={<SalesPersonForm />} />
+          <Route path="sales">
+            <Route path="" element={<SaleList sales={sales} />} />
+            <Route
+              path="new"
+              element={
+                <SaleRecordForm
+                  customers={customers}
+                  salesPersons={salesPerson}
+                  sales={sales}
+                  automobiles={automobiles}
+                />
+              }
+            />
+            <Route
+              path="history"
+              element={
+                <SalePersonHistory salesPersons={salesPerson} sales={sales} />
+              }
+            />
+          </Route>
+
+          <Route path="customers/new" element={<CustomerForm />} />
           <Route path="technician" element={<TechnicianForm />} />
           <Route path="appointments" element={<AppointmentList />} />
           <Route path="appointments">
-          <Route path="new" element={<AppointmentForm />} />
+            <Route path="new" element={<AppointmentForm />} />
           </Route>
         </Routes>
       </div>

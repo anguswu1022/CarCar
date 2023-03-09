@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function SaleRecordForm(props) {
+  const [soldAutomobiles, setSoldAutomobiles] = useState(props.sales);
+  const [availableAutomobiles, setAvailableAutomobiles] = useState([]);
   const [salesPerson, setSalesPerson] = useState("");
   const [customer, setCustomer] = useState("");
   const [automobile, setAutomobile] = useState("");
@@ -56,12 +58,40 @@ export default function SaleRecordForm(props) {
     setPrice(value);
   };
 
+  useEffect(() => {
+    const soldAutomobileVins = soldAutomobiles.map(
+      (soldAutomobile) => soldAutomobile.automobile.vin
+    );
+    setAvailableAutomobiles(
+      props.automobiles.filter((a) => !soldAutomobileVins.includes(a.vin))
+    );
+  }, [soldAutomobiles]);
+
   return (
     <div className="row">
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
           <h1>Record a new sale</h1>
           <form onSubmit={handleSubmit} id="create-sale-form">
+            <div className="mb-3">
+              <select
+                value={automobile}
+                onChange={handleAutomobileChange}
+                required
+                name="automobile"
+                id="automobile"
+                className="form-select"
+              >
+                <option value="">Choose an automobile</option>
+                {availableAutomobiles.map((automobile) => {
+                  return (
+                    <option key={automobile.vin} value={automobile.vin}>
+                      {automobile.vin}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
             <div className="mb-3">
               <select
                 value={salesPerson}
@@ -100,27 +130,6 @@ export default function SaleRecordForm(props) {
                       {customer.name}
                     </option>
                   );
-                })}
-              </select>
-            </div>
-            <div className="mb-3">
-              <select
-                value={automobile}
-                onChange={handleAutomobileChange}
-                required
-                name="automobile"
-                id="automobile"
-                className="form-select"
-              >
-                <option value="">Choose an automobile</option>
-                {props.automobile.map((automobile) => {
-                  if (automobile.vin in props.sales) {
-                    return (
-                      <option key={automobile.vin} value={automobile.vin}>
-                        {automobile.vin}
-                      </option>
-                    );
-                  }
                 })}
               </select>
             </div>

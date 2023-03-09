@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 function Nav() {
   return (
@@ -25,6 +25,71 @@ function Nav() {
                 Home
               </NavLink>
             </li>
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                id="navbarDarkDropdownMenuLink"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Inventory
+              </a>
+              <ul
+                className="dropdown-menu"
+                aria-labelledby="navbarDarkDropdownMenuLink"
+              >
+                <li>
+                  <Link className="dropdown-item" to="inventory/manufacturers">
+                    Manufacturers List
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="dropdown-item"
+                    to="inventory/manufacturers/new"
+                  >
+                    Create a Manufacturer
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="inventory/models">
+                    Vehicle Model List
+                  </Link>
+                </li>
+              </ul>
+            </li>
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                id="navbarDarkDropdownMenuLink"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Sales
+              </a>
+              <ul
+                className="dropdown-menu"
+                aria-labelledby="navbarDarkDropdownMenuLink"
+              >
+                <li>
+                  <Link className="dropdown-item" to="sales/new">
+                    Add Sale
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="sales">
+                    Sales List
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="sales/history">
+                    Sales Person History
+                  </Link>
+                </li>
+              </ul>
+            </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/sales_persons/new">
                 Add Sales Person
@@ -36,25 +101,14 @@ function Nav() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/sales">
-                Sale List
+              <NavLink className="nav-link" to="/technician">
+                New technician
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/sales/new">
-                Add Sale
+              <NavLink className="nav-link" to="/appointments/new">
+                New appointment
               </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/sales_history/">
-                Sales History
-              </NavLink>
-            </li>
-            <li>
-            <NavLink className="navbar-brand" to="/technician">New technician</NavLink>
-            </li>
-            <li>
-            <NavLink className="navbar-brand" to="/appointments/new">New appointment</NavLink>
             </li>
           </ul>
         </div>
