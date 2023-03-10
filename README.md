@@ -315,18 +315,6 @@ You can access the customer endpoints at the following URLs.
 | Update a specific customer | PUT | `http://localhost:8090/api/customers/:id/` | `api_customer` |
 | Delete a specific customer | DELETE | `http://localhost:8090/api/customers/:id/` | `api_customer` |
 
-### Customer
-
-You can access the customer endpoints at the following URLs.
-
-| Action | Method | URL | View Function |
-| :--- | :--- | :--- | :--- |
-| List customers | GET | `http://localhost:8090/api/customers/` | `api_customers` |
-| Create a customer | POST | `http://localhost:8090/api/customers/` | `api_customers` |
-| Get a specific customer | GET | `http://localhost:8090/api/customers/:id/` | `api_customer` |
-| Update a specific customer | PUT | `http://localhost:8090/api/customers/:id/` | `api_customer` |
-| Delete a specific customer | DELETE | `http://localhost:8090/api/customers/:id/` | `api_customer` |
-
 ### Sales
 
 You can access the sale endpoints at the following URLs.
