@@ -50,7 +50,7 @@ Restart the poller service using Docker desktop. You can navigate to http://loca
 
 ### Overview
 
-### RESTful API (Port 8090):
+### RESTful API (Port 8100):
 ### Manufacturers 
 You can access the manufacturer endpoints at the following URLs.
 | Action | Method | URL | View Function |
@@ -62,7 +62,7 @@ You can access the manufacturer endpoints at the following URLs.
 | Delete a specific manufacturer | DELETE | `http://localhost:8100/api/manufacturers/:id/` | `api_manufacturer`|
 
 <details>
-<summary><strong>Creating and updating a manufacturer Input</strong></summary>
+<summary><strong>Creating and updating a manufacturer input</strong></summary>
 
 ##### Requires only the manufacturer name
 ```
@@ -72,7 +72,7 @@ You can access the manufacturer endpoints at the following URLs.
 ```
 </details>
 <details>
-<summary><strong>Creating, getting, and updating a single manufacturer Output</strong></summary>
+<summary><strong>Creating, getting, and updating a single manufacturer output</strong></summary>
 
 ```
 {
@@ -83,7 +83,7 @@ You can access the manufacturer endpoints at the following URLs.
 ```
 </details>
 <details>
-<summary><strong>List of manufacturers Output</strong></summary>
+<summary><strong>List of manufacturers output</strong></summary>
 
 ```
 {
@@ -109,7 +109,7 @@ You can access the vehicle model endpoints at the following URLs.
 | Delete a specific vehicle model | DELETE | `http://localhost:8100/api/models/:id/` | `api_vehicle_model` |
 
 <details>
-<summary><strong>Creating and updating a vehicle model Input</strong></summary>
+<summary><strong>Creating and updating a vehicle model input</strong></summary>
 
 ##### Requires a model name, URL of an image, and manufacturer id
 ```
@@ -121,7 +121,7 @@ You can access the vehicle model endpoints at the following URLs.
 ```
 </details>
 <details>
-<summary><strong>Updating vehicle model Input</strong></summary>
+<summary><strong>Updating vehicle model input</strong></summary>
 
 
 ##### Can take the name and/or the picture URL
@@ -180,6 +180,86 @@ You can access the automobile endpoints at the following URLs.
 | Get a specific automobile | GET | `http://localhost:8100/api/automobiles/:vin/` | `api_automobile` |
 | Update a specific specific automobile | PUT | `http://localhost:8100/api/automobiles/:vin/` | `api_automobile` |
 | Delete a specific automobile | DELETE | `http://localhost:8100/api/automobiles/:vin/` | `api_automobile` |
+
+<details>
+<summary><strong>Creating an automobile Input</strong></summary>
+
+##### Create with the automobile color, year, VIN, and id for vehicle model
+```
+{
+  "color": "red",
+  "year": 2012,
+  "vin": "1C3CC5FB2AN120174",
+  "model_id": 1
+}
+```
+</details>
+<details>
+<summary><strong>Details for specific automobile output</strong></summary>
+
+
+##### Queried by its VIN
+```
+{
+  "href": "/api/automobiles/1C3CC5FB2AN120174/",
+  "id": 1,
+  "color": "yellow",
+  "year": 2013,
+  "vin": "1C3CC5FB2AN120174",
+  "model": {
+    "href": "/api/models/1/",
+    "id": 1,
+    "name": "Sebring",
+    "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
+    "manufacturer": {
+      "href": "/api/manufacturers/1/",
+      "id": 1,
+      "name": "Daimler-Chrysler"
+    }
+  }
+}
+```
+</details>
+<details>
+<summary><strong>Updating the automobile input</strong></summary>
+
+##### Can take the color and/or year of an automobile
+```
+{
+  "color": "red",
+  "year": 2012
+}
+```
+</details>
+<details>
+<summary><strong>List of Automobiles output</strong></summary>
+
+##### Returns dictionary with key "autos" set to list of automobile information
+```
+{
+  "autos": [
+    {
+      "href": "/api/automobiles/1C3CC5FB2AN120174/",
+      "id": 1,
+      "color": "yellow",
+      "year": 2013,
+      "vin": "1C3CC5FB2AN120174",
+      "model": {
+        "href": "/api/models/1/",
+        "id": 1,
+        "name": "Sebring",
+        "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
+        "manufacturer": {
+          "href": "/api/manufacturers/1/",
+          "id": 1,
+          "name": "Daimler-Chrysler"
+        }
+      }
+    }
+  ]
+}
+```
+</details>
 
 ## Service microservice
 
