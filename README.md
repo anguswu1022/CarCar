@@ -49,8 +49,25 @@ Restart the poller service using Docker desktop. You can navigate to http://loca
 ## Inventory microservice
 
 ### Overview
+The Inventory microservice provides users with the ability to manage the inventory of vehicles within a dealership. Through the API, users can create and/or update `Manufacturer`, `VehicleModel`, and `Automobile` objects, delete existing records, as well as listing and viewing the details for the objects in the inventory.
 
-### RESTful API (Port 8090):
+### Models
+
+`Manufacturer`
+* name
+
+`VehicleModel`
+* name
+* picture_url
+* manufacturer - A foreign key to Manufacturer
+
+`Automobile`
+* color
+* year
+* vin
+* model - A foreign key to VehicleModel
+
+### RESTful API (Port 8100):
 ### Manufacturers
 You can access the manufacturer endpoints at the following URLs.
 | Action | Method | URL | View Function |
@@ -62,7 +79,7 @@ You can access the manufacturer endpoints at the following URLs.
 | Delete a specific manufacturer | DELETE | `http://localhost:8100/api/manufacturers/:id/` | `api_manufacturer`|
 
 <details>
-<summary><strong>Creating and updating a manufacturer Input</strong></summary>
+<summary><strong>Creating and updating a manufacturer input</strong></summary>
 
 ##### Requires only the manufacturer name
 ```
@@ -72,7 +89,7 @@ You can access the manufacturer endpoints at the following URLs.
 ```
 </details>
 <details>
-<summary><strong>Creating, getting, and updating a single manufacturer Output</strong></summary>
+<summary><strong>Creating, getting, and updating a single manufacturer output</strong></summary>
 
 ```
 {
@@ -83,7 +100,7 @@ You can access the manufacturer endpoints at the following URLs.
 ```
 </details>
 <details>
-<summary><strong>List of manufacturers Output</strong></summary>
+<summary><strong>List of manufacturers output</strong></summary>
 
 ```
 {
@@ -109,7 +126,7 @@ You can access the vehicle model endpoints at the following URLs.
 | Delete a specific vehicle model | DELETE | `http://localhost:8100/api/models/:id/` | `api_vehicle_model` |
 
 <details>
-<summary><strong>Creating and updating a vehicle model Input</strong></summary>
+<summary><strong>Creating and updating a vehicle model input</strong></summary>
 
 ##### Requires a model name, URL of an image, and manufacturer id
 ```
@@ -121,7 +138,7 @@ You can access the vehicle model endpoints at the following URLs.
 ```
 </details>
 <details>
-<summary><strong>Updating vehicle model Input</strong></summary>
+<summary><strong>Updating vehicle model input</strong></summary>
 
 
 ##### Can take the name and/or the picture URL
@@ -178,8 +195,88 @@ You can access the automobile endpoints at the following URLs.
 | List automobiles | GET | `http://localhost:8100/api/automobiles/` | `api_automobiles` |
 | Create an automobile | POST | `http://localhost:8100/api/automobiles/` | `api_automobiles` |
 | Get a specific automobile | GET | `http://localhost:8100/api/automobiles/:vin/` | `api_automobile` |
-| Update a specific specific automobile | PUT | `http://localhost:8100/api/automobiles/:vin/` | `api_automobile` |
+| Update a specific automobile | PUT | `http://localhost:8100/api/automobiles/:vin/` | `api_automobile` |
 | Delete a specific automobile | DELETE | `http://localhost:8100/api/automobiles/:vin/` | `api_automobile` |
+
+<details>
+<summary><strong>Creating an automobile Input</strong></summary>
+
+##### Create with the automobile color, year, VIN, and id for vehicle model
+```
+{
+  "color": "red",
+  "year": 2012,
+  "vin": "1C3CC5FB2AN120174",
+  "model_id": 1
+}
+```
+</details>
+<details>
+<summary><strong>Details for specific automobile output</strong></summary>
+
+
+##### Queried by its VIN
+```
+{
+  "href": "/api/automobiles/1C3CC5FB2AN120174/",
+  "id": 1,
+  "color": "yellow",
+  "year": 2013,
+  "vin": "1C3CC5FB2AN120174",
+  "model": {
+    "href": "/api/models/1/",
+    "id": 1,
+    "name": "Sebring",
+    "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
+    "manufacturer": {
+      "href": "/api/manufacturers/1/",
+      "id": 1,
+      "name": "Daimler-Chrysler"
+    }
+  }
+}
+```
+</details>
+<details>
+<summary><strong>Updating the automobile input</strong></summary>
+
+##### Can take the color and/or year of an automobile
+```
+{
+  "color": "red",
+  "year": 2012
+}
+```
+</details>
+<details>
+<summary><strong>List of Automobiles output</strong></summary>
+
+##### Returns dictionary with key "autos" set to list of automobile information
+```
+{
+  "autos": [
+    {
+      "href": "/api/automobiles/1C3CC5FB2AN120174/",
+      "id": 1,
+      "color": "yellow",
+      "year": 2013,
+      "vin": "1C3CC5FB2AN120174",
+      "model": {
+        "href": "/api/models/1/",
+        "id": 1,
+        "name": "Sebring",
+        "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
+        "manufacturer": {
+          "href": "/api/manufacturers/1/",
+          "id": 1,
+          "name": "Daimler-Chrysler"
+        }
+      }
+    }
+  ]
+}
+```
+</details>
 
 ## Service microservice
 
@@ -316,5 +413,55 @@ You can access the service endpoints at the following URLs.
 
 ## Sales microservice
 
-Explain your models and integration with the inventory
-microservice, here.
+### Overview
+
+### Models
+
+### RESTful API (Port 8090)
+
+### Sales Person
+
+You can access the sales person endpoints at the following URLs.
+
+| Action | Method | URL | View Function |
+| :--- | :--- | :--- | :--- |
+| List sales people | GET | `http://localhost:8090/api/sales_persons/` | `api_sales_persons` |
+| Create a sales person | POST | `http://localhost:8090/api/sales_persons/` | `api_sales_persons` |
+| Get a specific sales person | GET | `http://localhost:8090/api/sales_persons/:id/` | `api_sales_person` |
+| Update a specific sales person | PUT | `http://localhost:8090/api/sales_persons/:id/` | `api_sales_person` |
+| Delete a specific sales person | DELETE | `http://localhost:8090/api/sales_persons/:id/` | `api_sales_person` |
+
+### Customer
+
+You can access the customer endpoints at the following URLs.
+
+| Action | Method | URL | View Function |
+| :--- | :--- | :--- | :--- |
+| List customers | GET | `http://localhost:8090/api/customers/` | `api_customers` |
+| Create a customer | POST | `http://localhost:8090/api/customers/` | `api_customers` |
+| Get a specific customer | GET | `http://localhost:8090/api/customers/:id/` | `api_customer` |
+| Update a specific customer | PUT | `http://localhost:8090/api/customers/:id/` | `api_customer` |
+| Delete a specific customer | DELETE | `http://localhost:8090/api/customers/:id/` | `api_customer` |
+
+### Customer
+
+You can access the customer endpoints at the following URLs.
+
+| Action | Method | URL | View Function |
+| :--- | :--- | :--- | :--- |
+| List customers | GET | `http://localhost:8090/api/customers/` | `api_customers` |
+| Create a customer | POST | `http://localhost:8090/api/customers/` | `api_customers` |
+| Get a specific customer | GET | `http://localhost:8090/api/customers/:id/` | `api_customer` |
+| Update a specific customer | PUT | `http://localhost:8090/api/customers/:id/` | `api_customer` |
+| Delete a specific customer | DELETE | `http://localhost:8090/api/customers/:id/` | `api_customer` |
+
+### Sales
+
+You can access the sale endpoints at the following URLs.
+
+| Action | Method | URL | View Function |
+| :--- | :--- | :--- | :--- |
+| List sales | GET | `http://localhost:8090/api/sales/` | `api_sales` |
+| Create a sale | POST | `http://localhost:8090/api/sales/` | `api_sales` |
+| Get a specific sale | GET | `http://localhost:8090/api/sales/:id/` | `api_sale` |
+| Delete a specific sale | DELETE | `http://localhost:8090/api/sales/:id/` | `api_sale` |
