@@ -2,10 +2,19 @@
 
 Team:
 
-* Person 1 - Which microservice?
-* Person 2 - Which microservice?
+- Ethan Brown - Service microservice
+- Angus Wu - Sales microservice
+
+## Contents
+
+- [Design](#design)
+- [Installation](#installation)
+- [Service Microservice](#service-microservice)
+- [Sale Microservice](#sales-microservice)
 
 ## Design
+
+## Installation
 
 ## Service microservice
 
