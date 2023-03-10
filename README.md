@@ -23,7 +23,13 @@ Navigate to the desired directory from your terminal and use git to clone this r
 git clone https://gitlab.com/anguswu1022/project-beta.git
 ```
 
-Make sure you have Docker desktop installed from - https://www.docker.com
+Make sure you have Docker desktop installed from - https://www.docker.com and run the following commands in your terminal:
+
+```
+docker volume create beta-data
+docker-compose build
+docker-compose up
+```
 
 ## Inventory microservice
 
