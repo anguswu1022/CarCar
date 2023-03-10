@@ -169,6 +169,7 @@ You can access the vehicle model endpoints at the following URLs.
   ]
 }
 ```
+</details>
 
 ### Automobile Information 
 You can access the automobile endpoints at the following URLs.
