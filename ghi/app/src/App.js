@@ -23,6 +23,7 @@ import AutomobileForm from "./Inventory/AutomobileForm";
 import ManufacturerList from "./Inventory/ManufacturerList";
 import ManufacturerForm from "./Inventory/ManufacturerForm";
 import VehicleModelList from "./Inventory/VehicleModelList";
+import AppointmentHistory from "./AppointmentHistory";
 
 export default function App() {
   const [sales, setSales] = useState([]);
@@ -208,6 +209,7 @@ export default function App() {
           <Route path="appointments">
             <Route path="" element={<AppointmentList />} />
             <Route path="new" element={<AppointmentForm />} />
+            <Route path="history" element={<AppointmentHistory/>} />
           </Route>
           <Route
             path="customers/new"

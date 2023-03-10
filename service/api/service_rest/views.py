@@ -238,13 +238,37 @@ def api_appointments_by_vin(request, vin):
 
 @require_http_methods(["PUT"])
 def api_appointment_cancel(request, pk):
-    appointment = Appointment.objects.get(pk=pk)
-    appointment.canceled = True
-    appointment.save()
+    try:
+        appointment = Appointment.objects.get(pk=pk)
+        appointment.canceled = True
+        appointment.save()
+        return JsonResponse(
+                    appointment,
+                    encoder=AppointmentListEncoder,
+                    safe=False
+                )
+    except Exception as e:
+        response = JsonResponse(
+            {"message": f"Could not create the appointment- {e}"}
+        )
+        response.status_code = 400
+        return response
 
 
 @require_http_methods(["PUT"])
 def api_appointment_complete(request, pk):
-    appointment = Appointment.objects.get(pk=pk)
-    appointment.completed = True
-    appointment.save()
+    try:
+        appointment = Appointment.objects.get(pk=pk)
+        appointment.completed = True
+        appointment.save()
+        return JsonResponse(
+                    appointment,
+                    encoder=AppointmentListEncoder,
+                    safe=False
+                )
+    except Exception as e:
+        response = JsonResponse(
+            {"message": f"Could not create the appointment- {e}"}
+        )
+        response.status_code = 400
+        return response

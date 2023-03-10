@@ -23,7 +23,6 @@ function AutomobileList() {
             method: 'DELETE',
         }).then((result) => {
             result.json().then((resp) => {
-                console.warn(resp)
                 getAutomobile()
             })
         })
