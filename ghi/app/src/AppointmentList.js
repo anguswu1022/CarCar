@@ -4,6 +4,7 @@ import star from '/app/src/AutoService/star.png';
 
 function AppointmentList() {
     const [appointments, setAppointments] = useState([]);
+    const [autos, setAutos] = useState([]);
     const fetchData = async () => {
         const url = 'http://localhost:8080/api/appointments/';
         const response = await fetch(url);
@@ -12,9 +13,19 @@ function AppointmentList() {
             setAppointments(data.appointments);
         }
     };
+    const fetchAutos = async () => {
+        const url = 'http://localhost:8100/api/automobiles/';
+        const response = await fetch(url);
+        if (response.ok) {
+            const data = await response.json();
+            setAutos(data.autos);
+        }
+    };
+
 
     function getAppointments() {
         fetchData();
+        fetchAutos();
     }
 
     function cancelAppointment(href) {
@@ -47,13 +58,23 @@ function AppointmentList() {
         })
     }
 
+    function isStarred(appointment) {
+        let isStarredItem = false;
+        autos.forEach(auto => {
+            if(appointment.vin === auto.vin) {
+                isStarredItem = true;
+            }
+        });
+        return isStarredItem;
+    }
+
     useEffect(() => {
         getAppointments();
     }, []);
 
     return (
         <div className="row">
-            <div className="offset-3 col-6">
+            <div className="mt-4 col-10">
                 <h1>Appointments</h1>
                 <table className="table table-striped">
                     <thead>
@@ -71,7 +92,7 @@ function AppointmentList() {
                     <tbody>
                         {appointments.filter((appointment)=>appointment.canceled===false&&appointment.completed===false).map((appointment, id) => (
                             <tr key={id} value={appointment.id}>
-                                <td><img src={star} width="35" /></td>
+                                <td>{isStarred(appointment) ?  (<img src={star} width="35" />) : null}</td>
                                 <td>{appointment.owner}</td>
                                 <td>{appointment.vin}</td>
                                 <td>{appointment.date}</td>
@@ -79,7 +100,7 @@ function AppointmentList() {
                                 <td>{appointment.technician}</td>
                                 <td>{appointment.reason}</td>
                                 <td>
-                                <button onClick={() => completeAppointment(appointment.href)} type="button" className="btn btn-primary">Completed</button>
+                                <button onClick={() => completeAppointment(appointment.href)} type="button" className="btn btn-primary" style={{ marginRight: '10px' }}>Completed</button>
                                 <button onClick={() => cancelAppointment(appointment.href)} type="button" className="btn btn-danger">Cancel</button>
                                 </td>
                             </tr>

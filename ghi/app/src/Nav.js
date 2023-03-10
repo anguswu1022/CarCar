@@ -132,6 +132,11 @@ function Nav() {
                     New appointment
                   </Link>
                 </li>
+                <li>
+                  <Link className="dropdown-item" to="appointments/history">
+                    Appointment History
+                  </Link>
+                </li>
               </ul>
             </li>
             <li className="nav-item">
