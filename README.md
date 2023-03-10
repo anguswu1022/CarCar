@@ -195,7 +195,7 @@ You can access the automobile endpoints at the following URLs.
 | List automobiles | GET | `http://localhost:8100/api/automobiles/` | `api_automobiles` |
 | Create an automobile | POST | `http://localhost:8100/api/automobiles/` | `api_automobiles` |
 | Get a specific automobile | GET | `http://localhost:8100/api/automobiles/:vin/` | `api_automobile` |
-| Update a specific specific automobile | PUT | `http://localhost:8100/api/automobiles/:vin/` | `api_automobile` |
+| Update a specific automobile | PUT | `http://localhost:8100/api/automobiles/:vin/` | `api_automobile` |
 | Delete a specific automobile | DELETE | `http://localhost:8100/api/automobiles/:vin/` | `api_automobile` |
 
 <details>
@@ -285,5 +285,55 @@ microservice, here.
 
 ## Sales microservice
 
-Explain your models and integration with the inventory
-microservice, here.
+### Overview
+
+### Models
+
+### RESTful API (Port 8090)
+
+### Sales Person
+
+You can access the sales person endpoints at the following URLs.
+
+| Action | Method | URL | View Function |
+| :--- | :--- | :--- | :--- |
+| List sales people | GET | `http://localhost:8090/api/sales_persons/` | `api_sales_persons` |
+| Create a sales person | POST | `http://localhost:8090/api/sales_persons/` | `api_sales_persons` |
+| Get a specific sales person | GET | `http://localhost:8090/api/sales_persons/:id/` | `api_sales_person` |
+| Update a specific sales person | PUT | `http://localhost:8090/api/sales_persons/:id/` | `api_sales_person` |
+| Delete a specific sales person | DELETE | `http://localhost:8090/api/sales_persons/:id/` | `api_sales_person` |
+
+### Customer
+
+You can access the customer endpoints at the following URLs.
+
+| Action | Method | URL | View Function |
+| :--- | :--- | :--- | :--- |
+| List customers | GET | `http://localhost:8090/api/customers/` | `api_customers` |
+| Create a customer | POST | `http://localhost:8090/api/customers/` | `api_customers` |
+| Get a specific customer | GET | `http://localhost:8090/api/customers/:id/` | `api_customer` |
+| Update a specific customer | PUT | `http://localhost:8090/api/customers/:id/` | `api_customer` |
+| Delete a specific customer | DELETE | `http://localhost:8090/api/customers/:id/` | `api_customer` |
+
+### Customer
+
+You can access the customer endpoints at the following URLs.
+
+| Action | Method | URL | View Function |
+| :--- | :--- | :--- | :--- |
+| List customers | GET | `http://localhost:8090/api/customers/` | `api_customers` |
+| Create a customer | POST | `http://localhost:8090/api/customers/` | `api_customers` |
+| Get a specific customer | GET | `http://localhost:8090/api/customers/:id/` | `api_customer` |
+| Update a specific customer | PUT | `http://localhost:8090/api/customers/:id/` | `api_customer` |
+| Delete a specific customer | DELETE | `http://localhost:8090/api/customers/:id/` | `api_customer` |
+
+### Sales
+
+You can access the sale endpoints at the following URLs.
+
+| Action | Method | URL | View Function |
+| :--- | :--- | :--- | :--- |
+| List sales | GET | `http://localhost:8090/api/sales/` | `api_sales` |
+| Create a sale | POST | `http://localhost:8090/api/sales/` | `api_sales` |
+| Get a specific sale | GET | `http://localhost:8090/api/sales/:id/` | `api_sale` |
+| Delete a specific sale | DELETE | `http://localhost:8090/api/sales/:id/` | `api_sale` |
