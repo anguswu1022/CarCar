@@ -13,15 +13,16 @@ Team:
 - [Service Microservice](#service-microservice)
 - [Sales Microservice](#sales-microservice)
 
-## Context Map
-
-
 ## Design
 
 - Application to manage an automobile dealership
 - Tracks inventory, sales, and services with microservices
 - Uses RESTful API Django in the back-end
 - React in the front-end to display data and allow for user interaction
+
+## Context Map
+
+<img src="ghi/app/src/AutoService/Context_map.png">
 
 ## Installation
 
