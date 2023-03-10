@@ -13,6 +13,9 @@ Team:
 - [Service Microservice](#service-microservice)
 - [Sales Microservice](#sales-microservice)
 
+## Context Map
+
+
 ## Design
 
 - Application to manage an automobile dealership
