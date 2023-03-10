@@ -214,7 +214,6 @@ You can access the automobile endpoints at the following URLs.
 <details>
 <summary><strong>Details for specific automobile output</strong></summary>
 
-
 ##### Queried by its VIN
 ```
 {
@@ -303,6 +302,52 @@ You can access the sales person endpoints at the following URLs.
 | Update a specific sales person | PUT | `http://localhost:8090/api/sales_persons/:id/` | `api_sales_person` |
 | Delete a specific sales person | DELETE | `http://localhost:8090/api/sales_persons/:id/` | `api_sales_person` |
 
+<details>
+<summary><strong>Creating and updating a sales person input</strong></summary>
+
+##### Requires the name and employee number (either/or for update)
+```
+{
+	"name": "Angus Wu",
+	"employee_number": 29325
+}
+```
+</details>
+<details>
+<summary><strong>Getting a specific sales person output</strong></summary>
+
+```
+{
+	"name": "Angus Wu",
+	"employee_number": "29325"
+}
+```
+</details>
+<details>
+<summary><strong>List of sales people output</strong></summary>
+
+```
+{
+	"sales_persons": [
+		{
+			"name": "Angus Wu",
+			"employee_number": "29325"
+		}
+	]
+}
+```
+</details>
+<details>
+<summary><strong>Delete sales person output</strong></summary>
+
+```
+{
+	"Deleted": true
+}
+
+```
+</details>
+
 ### Customer
 
 You can access the customer endpoints at the following URLs.
@@ -315,6 +360,57 @@ You can access the customer endpoints at the following URLs.
 | Update a specific customer | PUT | `http://localhost:8090/api/customers/:id/` | `api_customer` |
 | Delete a specific customer | DELETE | `http://localhost:8090/api/customers/:id/` | `api_customer` |
 
+<details>
+<summary><strong>Creating and updating a customer input</strong></summary>
+
+##### Requires the name, address, and phone number
+```
+{
+	"name": "Sebastian",
+	"address": "5233 Cass St, San Diego, CA",
+	"phone_number": "123-456-7890"
+}
+```
+</details>
+<details>
+<summary><strong>Getting a specific customer output</strong></summary>
+
+```
+{
+	"id": 1,
+	"name": "Sebastian",
+	"address": "5233 Cass St, San Diego, CA",
+	"phone_number": "123-456-7890"
+}
+```
+</details>
+<details>
+<summary><strong>List of customers output</strong></summary>
+
+```
+{
+	"customers": [
+		{
+			"id": 2,
+			"name": "Sebastian",
+			"address": "5233 Cass St, San Diego, CA",
+			"phone_number": "123-456-7890"
+		}
+	]
+}
+```
+</details>
+<details>
+<summary><strong>Delete customer output</strong></summary>
+
+```
+{
+	"Deleted": true
+}
+
+```
+</details>
+
 ### Sales
 
 You can access the sale endpoints at the following URLs.
@@ -325,3 +421,77 @@ You can access the sale endpoints at the following URLs.
 | Create a sale | POST | `http://localhost:8090/api/sales/` | `api_sales` |
 | Get a specific sale | GET | `http://localhost:8090/api/sales/:id/` | `api_sale` |
 | Delete a specific sale | DELETE | `http://localhost:8090/api/sales/:id/` | `api_sale` |
+
+<details>
+<summary><strong>Creating a sale input</strong></summary>
+
+##### Requires the automobile VIN, sales person employee_number, customer id, and price
+```
+{
+	"automobile": "1C3PO5MN03J129203",
+	"sales_person": 1,
+	"customer": 1,
+	"price": "73900"
+}
+```
+</details>
+<details>
+<summary><strong>Getting a specific sale output</strong></summary>
+
+```
+{
+	"id": 1,
+	"price": "73128",
+	"automobile": {
+		"vin": "1C3CC5FB2AN120174"
+	},
+	"sales_person": {
+		"name": "Angus Wu",
+		"employee_number": "29325"
+	},
+	"customer": {
+		"id": 1,
+		"name": "Sebastian",
+		"address": "5233 Cass St, San Diego, CA",
+		"phone_number": "123-456-7890"
+	}
+}
+```
+</details>
+<details>
+<summary><strong>List of sales output</strong></summary>
+
+```
+{
+	"sales": [
+		{
+			"id": 1,
+			"price": "73128",
+			"automobile": {
+				"vin": "1C3CC5FB2AN120174"
+			},
+			"sales_person": {
+				"name": "Angus Wu",
+				"employee_number": "29325"
+			},
+			"customer": {
+				"id": 1,
+				"name": "Sebastian",
+				"address": "5233 Cass St, San Diego, CA",
+				"phone_number": "123-456-7890"
+			}
+		}
+	]
+}
+```
+</details>
+<details>
+<summary><strong>Delete sale output</strong></summary>
+
+```
+{
+	"Deleted": true
+}
+
+```
+</details>
