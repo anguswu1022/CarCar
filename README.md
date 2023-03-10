@@ -42,6 +42,7 @@ Once all the containers are up and running in your Docker desktop, you can navig
 
 ### Overview
 
+### RESTful API (Port 8090):
 ### Manufacturers 
 You can access the manufacturer endpoints at the following URLs.
 | Action | Method | URL | View Function |
@@ -54,13 +55,13 @@ You can access the manufacturer endpoints at the following URLs.
 
 ### Vehicle Models 
 You can access the vehicle model endpoints at the following URLs.
-| Action | Method | URL |
+| Action | Method | URL | View Function |
 | :---         | :---    | :---          |
-| List vehicle models | GET | `http://localhost:8100/api/models/` |
-| Create a vehicle model | POST | `http://localhost:8100/api/models/` |
-| Get a specific vehicle model | GET | `http://localhost:8100/api/models/:id/` |
-| Update a specific specific vehicle model | PUT | `http://localhost:8100/api/models/:id/` |
-| Delete a specific vehicle model | DELETE | `http://localhost:8100/api/models/:id/` |
+| List vehicle models | GET | `http://localhost:8100/api/models/` | `api_vehicle_models` |
+| Create a vehicle model | POST | `http://localhost:8100/api/models/` | `api_vehicle_models` |
+| Get a specific vehicle model | GET | `http://localhost:8100/api/models/:id/` | `api_vehicle_model` |
+| Update a specific specific vehicle model | PUT | `http://localhost:8100/api/models/:id/` | `api_vehicle_model` |
+| Delete a specific vehicle model | DELETE | `http://localhost:8100/api/models/:id/` | `api_vehicle_model` |
 
 ### Automobile Information 
 You can access the automobile endpoints at the following URLs.
