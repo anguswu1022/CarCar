@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import MainPage from "./MainPage";
 import Nav from "./Nav";
+
+// Sales components
 import CustomerForm from "./Sales/CustomerForm";
 import SalesPersonForm from "./Sales/SalesPersonForm";
 import SaleRecordForm from "./Sales/SaleRecordForm";
 import SaleList from "./Sales/SaleList";
 import SalePersonHistory from "./Sales/SalePersonHistory";
+
+// Service components
 import TechnicianForm from "./TechnicianForm";
 import AppointmentForm from "./AppointmentForm";
 import AppointmentList from "./AppointmentList";
+
+// Inventory components
 import VehicleForm from "./Inventory/VehicleForm";
 import AutomobileList from "./Inventory/AutomobileList";
 import AutomobileForm from "./Inventory/AutomobileForm";
@@ -20,6 +27,12 @@ import AppointmentHistory from "./AppointmentHistory";
 
 export default function App() {
   const [sales, setSales] = useState([]);
+  const [salesPerson, setSalesPerson] = useState([]);
+  const [automobiles, setAutomobiles] = useState([]);
+  const [manufacturer, setManufacturer] = useState([]);
+  const [vehicleModel, setVehicleModel] = useState([]);
+  const [customers, setCustomers] = useState([]);
+
   const fetchSalesData = async () => {
     const url = "http://localhost:8090/api/sales/";
     const response = await fetch(url);
@@ -29,7 +42,6 @@ export default function App() {
     }
   };
 
-  const [salesPerson, setSalesPerson] = useState([]);
   const fetchSalesPersonData = async () => {
     const url = "http://localhost:8090/api/sales_persons/";
     const response = await fetch(url);
@@ -39,7 +51,6 @@ export default function App() {
     }
   };
 
-  const [automobiles, setAutomobiles] = useState([]);
   const fetchAutomobilesData = async () => {
     const url = "http://localhost:8100/api/automobiles/";
     const response = await fetch(url);
@@ -50,7 +61,6 @@ export default function App() {
     }
   };
 
-  const [manufacturer, setManufacturer] = useState([]);
   const fetchManufacturerData = async () => {
     const url = "http://localhost:8100/api/manufacturers/";
     const response = await fetch(url);
@@ -61,7 +71,6 @@ export default function App() {
     }
   };
 
-  const [vehicleModel, setVehicleModel] = useState([]);
   const fetchVehicleModelData = async () => {
     const url = "http://localhost:8100/api/models/";
     const response = await fetch(url);
@@ -72,7 +81,6 @@ export default function App() {
     }
   };
 
-  const [customers, setCustomers] = useState([]);
   const fetchCustomersData = async () => {
     const url = "http://localhost:8090/api/customers/";
     const response = await fetch(url);
@@ -81,6 +89,36 @@ export default function App() {
       const data = await response.json();
       setCustomers(data.customers);
     }
+  };
+
+  const handleAutomobileCreated = (newAutomobile) => {
+    setAutomobiles((oldAutomobiles) => [...oldAutomobiles, newAutomobile]);
+  };
+
+  const handleSaleCreated = (newSale) => {
+    setSales((oldSales) => [...oldSales, newSale]);
+  };
+
+  const handleManufacturerCreated = (newManufacturer) => {
+    setManufacturer((oldManufacturers) => [
+      ...oldManufacturers,
+      newManufacturer,
+    ]);
+  };
+
+  const handleVehicleModelCreated = (newVehicleModel) => {
+    setVehicleModel((oldVehicleModels) => [
+      ...oldVehicleModels,
+      newVehicleModel,
+    ]);
+  };
+
+  const handleSalesPersonCreated = (newSalesPerson) => {
+    setSalesPerson((oldSalesPersons) => [...oldSalesPersons, newSalesPerson]);
+  };
+
+  const handleCustomerCreated = (newCustomer) => {
+    setCustomers((oldCustomers) => [...oldCustomers, newCustomer]);
   };
 
   useEffect(() => {
@@ -104,21 +142,49 @@ export default function App() {
                 path=""
                 element={<ManufacturerList manufacturers={manufacturer} />}
               />
-              <Route path="new" element={<ManufacturerForm />} />
+              <Route
+                path="new"
+                element={
+                  <ManufacturerForm
+                    onManufacturerCreated={handleManufacturerCreated}
+                  />
+                }
+              />
             </Route>
             <Route path="models">
               <Route
                 path=""
                 element={<VehicleModelList vehicleModels={vehicleModel} />}
               />
-              <Route path="new" element={<VehicleForm />} />
+              <Route
+                path="new"
+                element={
+                  <VehicleForm
+                    onVehicleModelCreated={handleVehicleModelCreated}
+                  />
+                }
+              />
             </Route>
             <Route path="automobiles">
               <Route path="" element={<AutomobileList />} />
-              <Route path="new" element={<AutomobileForm />} />
+              <Route
+                path="new"
+                element={
+                  <AutomobileForm
+                    onAutomobileCreated={handleAutomobileCreated}
+                  />
+                }
+              />
             </Route>
           </Route>
-          <Route path="sales_persons/new" element={<SalesPersonForm />} />
+          <Route
+            path="sales_persons/new"
+            element={
+              <SalesPersonForm
+                onSalesPersonCreated={handleSalesPersonCreated}
+              />
+            }
+          />
           <Route path="sales">
             <Route path="" element={<SaleList sales={sales} />} />
             <Route
@@ -129,6 +195,7 @@ export default function App() {
                   salesPersons={salesPerson}
                   sales={sales}
                   automobiles={automobiles}
+                  onSaleCreated={handleSaleCreated}
                 />
               }
             />
@@ -144,7 +211,10 @@ export default function App() {
             <Route path="new" element={<AppointmentForm />} />
             <Route path="history" element={<AppointmentHistory/>} />
           </Route>
-          <Route path="customers/new" element={<CustomerForm />} />
+          <Route
+            path="customers/new"
+            element={<CustomerForm onCustomerCreated={handleCustomerCreated} />}
+          />
           <Route path="technician" element={<TechnicianForm />} />
         </Routes>
       </div>

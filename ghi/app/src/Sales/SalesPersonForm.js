@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function SalesPersonForm() {
+export default function SalesPersonForm(props) {
   const [name, setName] = useState("");
   const [employeeNumber, setEmployeeNumber] = useState("");
 
@@ -14,7 +14,7 @@ export default function SalesPersonForm() {
 
     const salesPersonUrl = "http://localhost:8090/api/sales_persons/";
     const fetchConfig = {
-      method: "post",
+      method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export default function SalesPersonForm() {
     const response = await fetch(salesPersonUrl, fetchConfig);
     if (response.ok) {
       const newSalesPerson = await response.json();
-
+      props.onSalesPersonCreated(newSalesPerson);
       setName("");
       setEmployeeNumber("");
     }

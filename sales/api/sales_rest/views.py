@@ -132,16 +132,27 @@ def api_sales(request):
         try:
             automobile = AutomobileVO.objects.get(vin=content["automobile"])
             content["automobile"] = automobile
-
-            customer = Customer.objects.get(id=content["customer"])
-            content["customer"] = customer
-
-            sales_person = Sales_Person.objects.get(employee_number=content["sales_person"])
-            content["sales_person"] = sales_person
-
         except AutomobileVO.DoesNotExist:
             return JsonResponse(
-                {"message": "Invalid automobile vin"},
+                {"message": "Automobile vin doesn't exist"},
+                status=400,
+            )
+
+        try:
+            customer = Customer.objects.get(id=content["customer"])
+            content["customer"] = customer
+        except Customer.DoesNotExist:
+            return JsonResponse(
+                {"message": "Customer id doesn't exist"},
+                status=400,
+            )
+
+        try:
+            sales_person = Sales_Person.objects.get(employee_number=content["sales_person"])
+            content["sales_person"] = sales_person
+        except Sales_Person.DoesNotExist:
+            return JsonResponse(
+                {"message": "Sales person employee number doesn't exist"},
                 status=400,
             )
 

@@ -19,10 +19,7 @@ export default function VehicleModelList(props) {
                 <td>{vehicle.name}</td>
                 <td>{vehicle.manufacturer.name}</td>
                 <td>
-                  <img
-                    src={vehicle.picture_url}
-                    style={{ width: "350px", height: "175px" }}
-                  />
+                  <img src={vehicle.picture_url} style={{ width: "300px" }} />
                 </td>
               </tr>
             );
