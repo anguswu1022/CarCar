@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function CustomerForm() {
+export default function CustomerForm(props) {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -26,7 +26,7 @@ export default function CustomerForm() {
     const response = await fetch(customerUrl, fetchConfig);
     if (response.ok) {
       const newCustomer = await response.json();
-
+      props.onCustomerCreated(newCustomer);
       setName("");
       setAddress("");
       setPhoneNumber("");

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function SalesPersonForm() {
+export default function SalesPersonForm(props) {
   const [name, setName] = useState("");
   const [employeeNumber, setEmployeeNumber] = useState("");
 
@@ -24,7 +24,7 @@ export default function SalesPersonForm() {
     const response = await fetch(salesPersonUrl, fetchConfig);
     if (response.ok) {
       const newSalesPerson = await response.json();
-
+      props.onSalesPersonCreated(newSalesPerson);
       setName("");
       setEmployeeNumber("");
     }

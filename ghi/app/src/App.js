@@ -112,6 +112,14 @@ export default function App() {
     ]);
   };
 
+  const handleSalesPersonCreated = (newSalesPerson) => {
+    setSalesPerson((oldSalesPersons) => [...oldSalesPersons, newSalesPerson]);
+  };
+
+  const handleCustomerCreated = (newCustomer) => {
+    setCustomers((oldCustomers) => [...oldCustomers, newCustomer]);
+  };
+
   useEffect(() => {
     fetchSalesData();
     fetchSalesPersonData();
@@ -168,7 +176,14 @@ export default function App() {
               />
             </Route>
           </Route>
-          <Route path="sales_persons/new" element={<SalesPersonForm />} />
+          <Route
+            path="sales_persons/new"
+            element={
+              <SalesPersonForm
+                onSalesPersonCreated={handleSalesPersonCreated}
+              />
+            }
+          />
           <Route path="sales">
             <Route path="" element={<SaleList sales={sales} />} />
             <Route
@@ -194,7 +209,10 @@ export default function App() {
             <Route path="" element={<AppointmentList />} />
             <Route path="new" element={<AppointmentForm />} />
           </Route>
-          <Route path="customers/new" element={<CustomerForm />} />
+          <Route
+            path="customers/new"
+            element={<CustomerForm onCustomerCreated={handleCustomerCreated} />}
+          />
           <Route path="technician" element={<TechnicianForm />} />
         </Routes>
       </div>
