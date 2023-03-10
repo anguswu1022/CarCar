@@ -49,6 +49,23 @@ Restart the poller service using Docker desktop. You can navigate to http://loca
 ## Inventory microservice
 
 ### Overview
+The Inventory microservice provides users with the ability to manage the inventory of vehicles within a dealership. Through the API, users can create and/or update `Manufacturer`, `VehicleModel`, and `Automobile` objects, delete existing records, as well as listing and viewing the details for the objects in the inventory.
+
+### Models
+
+`Manufacturer`
+* name
+
+`VehicleModel`
+* name
+* picture_url
+* manufacturer - A foreign key to Manufacturer
+
+`Automobile`
+* color
+* year
+* vin
+* model - A foreign key to VehicleModel
 
 ### RESTful API (Port 8100):
 ### Manufacturers 
