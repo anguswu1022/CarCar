@@ -429,7 +429,7 @@ You can access the sale endpoints at the following URLs.
 ```
 {
 	"automobile": "1C3PO5MN03J129203",
-	"sales_person": 1,
+	"sales_person": 29325,
 	"customer": 1,
 	"price": "73900"
 }
