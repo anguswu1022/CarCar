@@ -59,13 +59,13 @@ The Inventory microservice provides users with the ability to manage the invento
 `VehicleModel`
 * name
 * picture_url
-* manufacturer - A foreign key to Manufacturer
+* manufacturer - Foreign key to `Manufacturer`
 
 `Automobile`
 * color
 * year
 * vin
-* model - A foreign key to VehicleModel
+* model - Foreign key to `VehicleModel`
 
 ### RESTful API (Port 8100):
 ### Manufacturers 
@@ -287,6 +287,24 @@ microservice, here.
 ### Overview
 
 ### Models
+`AutomobileVO`
+* import_href
+* vin
+
+`Sales_Person`
+* name
+* employee_number
+
+`Customer`
+* name
+* address
+* phone_number
+
+`Sale`
+* automobile - Foreign key to `AutomobileVO`
+* sales_person - Foreign key to `Sales_Person`
+* customer - Foreign key to `Customer`
+* price
 
 ### RESTful API (Port 8090)
 
