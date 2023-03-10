@@ -14,7 +14,7 @@ Team:
 - [Sales Microservice](#sales-microservice)
 
 ## Design
-- Manage automobile dealership 
+- Application to manage an automobile dealership 
 - Tracks inventory, sales, and services with microservices
 - Uses RESTful API Django in the back-end
 - React in the front-end to display data and allow for user interaction
@@ -285,6 +285,12 @@ microservice, here.
 ## Sales microservice
 
 ### Overview
+The Sales microservice provides users with the ability to view and manage the aspects of a vehicle sale. Users can utilize the API's capabilities to create, update, list, and delete various objects relating to sales, including the automobiles (`AutomobileVO` objects), sales people (`Sales_Person` objects), customers (`Customer` objects), and sale records (`Sale` objects). 
+
+The frontend interface, built with React, offers users access to forms to create new sales people, customers, and sale records. Moreover, the interface provides comprehensive views of all sales records, which list key details such as the sales person, customer, and automobile VIN. Users can filter the sale records by a sale person to monitor their sale performance.
+
+### Poll
+The Sales microservice will poll the Inventory microservice for updated `Automobile` data every 5 seconds. The data is used to create and update automobile value objects (`AutomobileVO`).
 
 ### Models
 `AutomobileVO`
