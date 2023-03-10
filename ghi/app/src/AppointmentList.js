@@ -37,7 +37,6 @@ function AppointmentList() {
             }
         }).then((result) => {
             result.json().then((resp) => {
-                console.warn(resp)
                 getAppointments()
             })
         })
@@ -52,7 +51,6 @@ function AppointmentList() {
             }
         }).then((result) => {
             result.json().then((resp) => {
-                console.warn(resp)
                 getAppointments()
             })
         })
@@ -81,7 +79,7 @@ function AppointmentList() {
                         <tr>
                             <th>VIP</th>
                             <th>Owner</th>
-                            <th>Car</th>
+                            <th>VIN</th>
                             <th>Date</th>
                             <th>Time</th>
                             <th>Technician</th>
